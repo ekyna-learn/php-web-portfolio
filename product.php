@@ -1,3 +1,15 @@
+<?php
+
+require 'includes/function.php';
+$id = isset($_GET['id']) ? $_GET['id'] : 0;
+
+$product=getProductById($id);
+$brand=getBrandById($product['brand']);
+$category=findCategory($product['category']);
+if ($product==false){
+    exit('Hop hop hop on ne passe pas');
+}
+?> 
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,23 +24,26 @@
 </head>
 <body>
 <div class="container">
-    <p>Brand</p>
-    <h1>Product title</h1>
+    <a href="brand.php?id=<?php echo $brand['id']?>" >Brand :<?php echo $brand['title']?> </a>
+    <a href="category.php?id=<?php echo $category['id']?>"> Category:<?php echo $category['title']?> </a>
+
+
+    <h1>Product <?php echo $product['title']; ?></h1>
     <div class="row">
         <div class="col-md-6">
             <img src="http://placeimg.com/570/340/tech"
                  style="width:100%; height: auto;">
         </div>
         <div class="col-md-6">
-            <p>Product short description</p>
+            <p>Product <?php $product['short_desc'] ?></p>
             <table class="table">
                 <tr>
                     <th>Price</th>
-                    <td>99,99 €</td>
+                    <td><?php echo $product['price']?>€</td>
                 </tr>
                 <tr>
                     <th>Availability</th>
-                    <td>In stock</td>
+                    <td><?php echo $product['stock']?></td>
                 </tr>
                 <tr>
                     <th>Released at</th>
@@ -45,9 +60,8 @@
     <hr>
     <!-- Product long desc -->
     <div>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in metus et metus varius convallis in id ligula.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in metus et metus varius convallis in id ligula.</p>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in metus et metus varius convallis in id ligula.</p>
+        <p><?php $product['long_desc']?></p>
+        
     </div>
 </div>
 

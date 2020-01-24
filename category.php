@@ -1,3 +1,12 @@
+<?php
+$id=isset($_GET['id'])?$_GET['id']: 0;
+require 'includes/function.php';
+
+$categorie =findCategory($id);
+if (false===$categorie){
+    exit('Category introuvable');
+}
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -13,7 +22,7 @@
 <body>
 <div class="container">
     <!-- Category title -->
-    <h2>Categorie 1</h2>
+    <h2>Categorie <?php echo $id?></h2>
     <!-- Category long desc -->
     <div>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in metus et metus varius convallis in id ligula.</p>
@@ -24,8 +33,9 @@
     <!-- Category's products list -->
     <div>
         <!-- Product title -->
-        <h2>Product 1</h2>
+        <h2>Product <?php echo $categorie['id'];?></h2>
         <!-- Product short desc -->
+        <?php echo $categorie['long_desc'];?>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in metus et metus varius convallis in id ligula.</p>
         <p>
             <strong>In stock</strong>

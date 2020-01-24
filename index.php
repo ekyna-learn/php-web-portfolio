@@ -1,3 +1,6 @@
+<?php
+require 'includes/data.php';
+?>
 <!doctype html>
 <html lang="en">
 <head>
@@ -12,19 +15,22 @@
 </head>
 <body>
 <div class="container">
-    <h1>Catalog</h1>
+    <h1><?php echo date('d/m/y H:i:s');?></h1>
+    <p> Nombres de catégories: <?php echo count($categories);?></p>
     <hr>
     <!-- Categories list -->
+    <?php foreach ($categories as $category){?>
     <div>
         <!-- Category title -->
-        <h2>Categorie 1</h2>
+        <h2><?php echo $category['title']?></h2>
         <!-- Category short desc -->
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in metus et metus varius convallis in id ligula.</p>
+        <p><?php echo $category['short_desc']?></p>
         <p>
             <!-- Link to category detail -->
-            <a href="category.html">Voir les produits</a>
+            <a href="category.php?id=<?php echo $category['id']?>">Voir les produits</a>
         </p>
     </div>
+    <?php } ?>
     <hr>
     <!-- Other categories -->
 </div>
